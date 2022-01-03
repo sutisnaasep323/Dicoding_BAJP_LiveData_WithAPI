@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter
 import androidx.activity.viewModels
 import com.bumptech.glide.Glide
 import com.example.mylivedatawithapi.databinding.ActivityMainBinding
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
 
@@ -50,6 +51,20 @@ class MainActivity : AppCompatActivity() {
             val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(view.windowToken, 0)
         }
+
+        mainViewModel.snackbarText.observe(this, {
+            /**
+             * fungsi getContentIfHandled dari kelas Event untuk mengetahui apakah aksi
+             * tersebut pernah dilakukan sebelumnya atau tidak
+             */
+            it.getContentIfNotHandled()?.let { snackBarText ->
+                Snackbar.make(
+                    window.decorView.rootView,
+                    snackBarText,
+                    Snackbar.LENGTH_SHORT
+                ).show()
+            }
+        })
 
     }
 }
