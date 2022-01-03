@@ -10,7 +10,7 @@ interface ApiService {
     ): Call<RestaurantResponse>
 
     @FormUrlEncoded
-    @Headers("Authorization: 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")
+    @Headers("Authorization: YOUR_TOKEN")
     @POST("review")
     fun postReview(
         @Field("id") id: String,
